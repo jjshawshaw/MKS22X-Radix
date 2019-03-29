@@ -1,8 +1,8 @@
 
-class MyLinkedList{
+class MyLinkedList<E>{
   //Fields
  private int length;
- private Node start,end;
+ private Node<E> start,end;
 
  //Constructor
  public MyLinkedList(){
@@ -12,14 +12,14 @@ class MyLinkedList{
  }
 
 
- public boolean add(int value){
+ public boolean add(E value){
    if (length == 0){
-     end = new Node(value, null, null);
+     end = new Node<E>(value, null, null);
      start = end;
      length++;
    }
    else {
-     Node temp = new Node(value, null, end);
+     Node<E> temp = new Node<E>(value, null, end);
      end.setNext(temp);
      end = temp;
      length++;
@@ -28,7 +28,7 @@ class MyLinkedList{
  }
 
  public String toString(){
-   Node current = start;
+   Node<E> current = start;
    String out = "[";
    while (current != null){
      out += current + "";
@@ -39,7 +39,7 @@ class MyLinkedList{
    return out;
  }
 
-   public void extend(MyLinkedList other){
+   public void extend(MyLinkedList<E> other){
       end.setNext(other.start);
       length += other.length;
       other.length = 0;
@@ -48,33 +48,33 @@ class MyLinkedList{
     }
 
  //Node class
- private class Node{
-  private int data;
-  private Node next,prev;
+ private class Node<E>{
+  private E data;
+  private Node<E> next,prev;
 
-  public Node(int datain, Node nextin, Node previn){
+  public Node(E datain, Node<E> nextin, Node<E> previn){
     data = datain;
     next = nextin;
     prev = previn;
   }
 
-   public Node next(){
+   public Node<E> next(){
      return next;
    }
-   public Node prev(){
+   public Node<E> prev(){
      return prev;
    }
-   public void setNext(Node other){
+   public void setNext(Node<E> other){
      next = other;
    }
-   public void setPrev(Node other){
+   public void setPrev(Node<E> other){
      prev = other;
    }
-   public Integer getData(){
+   public E getData(){
      return data;
    }
-   public Integer setData(Integer i){
-     int temp = data;
+   public E setData(E i){
+     E temp = data;
      data = i;
      return temp;
    }
