@@ -2,13 +2,30 @@
 class MyLinkedList<E>{
   //Fields
  private int length;
- private Node<E> start,end;
+ private Node<E> start,end,current;
 
  //Constructor
  public MyLinkedList(){
    length = 0;
    start = null;
    end = null;
+   current = start;
+ }
+
+ public void clear(){
+   length = 0;
+   start = null;
+   end = null;
+ }
+
+ public Node<E> next(){
+   Node<E> temp = current;
+   current = current.next();
+   return temp;
+ }
+
+ public boolean hasNext(){
+   return current != null;
  }
 
 
@@ -17,6 +34,7 @@ class MyLinkedList<E>{
      end = new Node<E>(value, null, null);
      start = end;
      length++;
+     current = start;
    }
    else {
      Node<E> temp = new Node<E>(value, null, end);
