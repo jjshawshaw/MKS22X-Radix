@@ -18,10 +18,10 @@ class MyLinkedList<E>{
    end = null;
  }
 
- public Node<E> next(){
+ public E next(){
    Node<E> temp = current;
    current = current.next();
-   return temp;
+   return temp.getData();
  }
 
  public boolean hasNext(){
