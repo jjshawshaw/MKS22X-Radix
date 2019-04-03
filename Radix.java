@@ -16,17 +16,18 @@ public class Radix{
       if (i >= 0) buckets[i%dig + 10].add(i);
       else buckets[9 + i%dig].add(i);
     }
-    for (int i = 0; i < 20; i++){
-        System.out.println("bucket " + i + " : " + buckets[i]);
-      }
     while (count > 0){
-      fillBuckets(buckets, dig);
       dig *= 10;
+      fillBuckets(buckets, dig);
       count--;
     }
-    for (int i = 0; i < 20; i++){
-        System.out.println("bucket " + i + " : " + buckets[i]);
-      }
+    MyLinkedList<Integer> all = new MyLinkedList<Integer>();
+    for (MyLinkedList<Integer> bucket : buckets){
+      all.extend(bucket);
+    }
+    for (int i = 0; i < data.length; i++){
+      data[i] = all.next();
+    }
   }
 
   public static void fillBuckets(MyLinkedList<Integer>[] buckets, int dig){
@@ -36,12 +37,17 @@ public class Radix{
     }
     while (all.hasNext()){
       int nextInt = all.next();
-      if (nextInt >= 0) buckets[nextInt%dig + 10].add(nextInt);
-      else buckets[9 - nextInt%dig].add(nextInt);
+      if (nextInt >= 0) buckets[nextInt%dig/(dig / 10) + 10].add(nextInt);
+      else buckets[9 + nextInt%dig/(dig / 10)].add(nextInt);
     }
   }
 
   public static void main(String[] args){
-    radixsort(new int[] {12, -31, 24, -42, 2, -1, 14, -21});
+    int[] a = new int[] {12, -31, 24, -42, 2, -1, 14, -21};
+    radixsort(a);
+    for (int i : a){
+      System.out.print(i + " ");
+    }
+    System.out.println();
   }
 }

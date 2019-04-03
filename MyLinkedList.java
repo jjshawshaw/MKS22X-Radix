@@ -58,11 +58,21 @@ class MyLinkedList<E>{
  }
 
    public void extend(MyLinkedList<E> other){
-      end.setNext(other.start);
-      length += other.length;
-      other.length = 0;
-      other.start = null;
-      other.end = null;
+     if (other.length > 0){
+       if (length > 0){
+         end.setNext(other.start);
+         end = other.end;
+       }
+       else {
+         start = other.start;
+         end = other.end;
+       }
+       length += other.length;
+       other.length = 0;
+       other.start = null;
+       other.end = null;
+     }
+     current = start;
     }
 
  //Node class
