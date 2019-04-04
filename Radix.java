@@ -6,7 +6,7 @@ public class Radix{
     for (int i = 0; i < 20; i++){
       buckets[i] = new MyLinkedList<Integer>();
     }
-    int count = 0; 
+    int count = 0;
     for (int i : data){
       if (i > count) count = i;
     }
@@ -26,8 +26,10 @@ public class Radix{
     for (MyLinkedList<Integer> bucket : buckets){
       all.extend(bucket);
     }
-    for (int i = 0; i < data.length; i++){
-      data[i] = all.next();
+    int i = 0;
+    for (int nextInt : all){
+      data[i] = nextInt;
+      i++;
     }
   }
 
@@ -36,8 +38,7 @@ public class Radix{
     for (MyLinkedList<Integer> bucket : buckets){
       all.extend(bucket);
     }
-    while (all.hasNext()){
-      int nextInt = all.next();
+    for (int nextInt : all){
       if (nextInt >= 0) buckets[nextInt%dig/(dig / 10) + 10].add(nextInt);
       else buckets[9 + nextInt%dig/(dig / 10)].add(nextInt);
     }

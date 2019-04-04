@@ -1,5 +1,6 @@
 
-class MyLinkedList<E>{
+import java.util.*;
+class MyLinkedList<E> implements Iterable<E>{
   //Fields
  private int length;
  private Node<E> start,end,current;
@@ -19,15 +20,18 @@ class MyLinkedList<E>{
    current = start;
  }
 
- public E next(){
-   Node<E> temp = current;
-   current = current.next();
-   return temp.getData();
- }
-
- public boolean hasNext(){
-   return current != null;
- }
+public Iterator<E> iterator(){
+  return new MLEI(start);
+}
+ // public E next(){
+ //   Node<E> temp = current;
+ //   current = current.next();
+ //   return temp.getData();
+ // }
+ //
+ // public boolean hasNext(){
+ //   return current != null;
+ // }
 
 
  public boolean add(E value){
@@ -75,6 +79,22 @@ class MyLinkedList<E>{
      }
      current = start;
     }
+  private class MLEI implements Iterator<E>{
+    Node current;
+
+    public MLEI(Node start){
+      current = start;
+    }
+    public E next(){
+      Node<E> temp = current;
+      current = current.next();
+      return temp.getData();
+    }
+
+    public boolean hasNext(){
+      return current != null;
+    }
+  }
 
  //Node class
  private class Node<E>{
