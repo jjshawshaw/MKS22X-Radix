@@ -16,6 +16,7 @@ class MyLinkedList<E>{
    length = 0;
    start = null;
    end = null;
+   current = start;
  }
 
  public E next(){
